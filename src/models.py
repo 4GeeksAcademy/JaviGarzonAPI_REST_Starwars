@@ -1,7 +1,7 @@
 
 from sqlalchemy import Column, ForeignKey, Integer, String, DateTime
-from sqlalchemy.orm import relationship, declarative_base
-from sqlalchemy import create_engine
+from sqlalchemy.orm import relationship
+from flask_sqlalchemy import SQLAlchemy
 
 from datetime import datetime, timezone
 
@@ -30,8 +30,6 @@ class Planet(db.Model):
     Affiliations = Column(String(100), nullable=False)
     species= Column(String(50), nullable=False)
     places = Column(String(1000), nullable=False)
-    films = Column(String(1000), nullable=False)
-    Affiliations = Column(String(100), nullable=False)
     location = Column(String(80), nullable=False)
     climate = Column(String(100), nullable=False)
     terrain = Column(String(100), nullable=False)
