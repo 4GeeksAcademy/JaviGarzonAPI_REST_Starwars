@@ -20,6 +20,17 @@ class User(db.Model):
     
     favorites = relationship('Favorite', backref='user', lazy=True)
 
+def serialize(self):
+        return {
+            "id": self.id,
+            "username": self.username, 
+            "password": self.password,
+            "full_name": self.full_name,    
+            "email": self.email,
+            "created": self.created,       
+        }
+
+
 class Planet(db.Model):
     __tablename__ = 'planet'
     
@@ -35,14 +46,37 @@ class Planet(db.Model):
     terrain = Column(String(100), nullable=False)
     system = Column(String(100), nullable=False)
     vehicles = Column(String(100), nullable=False)
-    Weapons = Column(String(100), nullable=False)
-    Tool = Column(String(100), nullable=False)
+    weapons = Column(String(100), nullable=False)
+    tool = Column(String(100), nullable=False)
     droids = Column(String(100), nullable=False)
     surface_water = Column(String(10), nullable=False)
     created = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
     edited = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
     
     favorites = relationship('Favorite', backref='planet', lazy=True)
+
+def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name, 
+            "description": self.description,
+            "films": self.films,       
+            "Affiliations": self.Affiliations,
+            "species": self.species, 
+            "places": self.places,
+            "location": self.location,    
+            "climate": self.climate,
+            "terrain": self.terrain, 
+            "system": self.system,
+            "vehicles": self.vehicles,  
+            "weapons": self.weapons,
+            "tool": self.tool,    
+            "droids": self.droids,
+            "surface_water": self.surface_water, 
+            "created": self.created,
+            "edited": self.edited,        
+        }
+
 
 class Vehicle(db.Model):
     __tablename__ = 'vehicle'
@@ -63,6 +97,24 @@ class Vehicle(db.Model):
     
     favorites = relationship('Favorite', backref='vehicle', lazy=True)
 
+
+def serialize(self):
+        return {
+            "id": self.id,
+           "name": self.name, 
+            "model": self.model,
+            "vehicle_class": self.vehicle_class, 
+            "length": self.length,
+            "cost_in_credits": self.cost_in_credits,    
+            "drivers": self.drivers,
+            "history": self.history, 
+            "films": self.films,       
+            "Affiliations": self.Affiliations,
+            "planetlocation": self.planetlocation,
+            "created": self.created,
+            "edited": self.edited,                
+        }
+
 class People(db.Model):
     __tablename__ = 'people'
     
@@ -81,6 +133,23 @@ class People(db.Model):
     
     favorites = relationship('Favorite', backref='people', lazy=True)
 
+
+def serialize(self):
+        return {
+            "id": self.id,
+            "name": self.name, 
+            "gender": self.gender,
+            "height": self.height, 
+            "species": self.species,
+            "history": self.history, 
+            "films": self.films,       
+            "Affiliations": self.Affiliations,
+            "planetlocation": self.planetlocation,
+            "url": self.url,
+            "created": self.created,
+            "edited": self.edited,           
+        }
+
 class Favorite(db.Model):
     __tablename__ = 'favorite'
     
@@ -90,3 +159,12 @@ class Favorite(db.Model):
     vehicle_id = Column(Integer, ForeignKey('vehicle.id'), nullable=True)
     planet_id = Column(Integer, ForeignKey('planet.id'), nullable=True)
 
+
+def serialize(self):
+        return {
+            "id": self.id,
+            "user_id": self.user_id, 
+            "people_id": self.people_id,
+            "vehicle_id": self.vehicle_id,
+            "planet_id": self.planet_id,               
+        }
