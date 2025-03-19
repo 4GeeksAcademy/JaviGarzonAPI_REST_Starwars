@@ -56,10 +56,6 @@ def get_all_users():
 
 
 
-
-
-
-
 # Obtener todos los usuarios:
 @app.route('/people', methods=['GET'])
 def get_all_people():
@@ -171,23 +167,25 @@ def get_vehicle():
             "vehicle": vehicle.serialize()
         }), 200
 
+
 # Obtener todos los usuarios:
-@app.route('/user', methods=['GET'])
-def get_all_users():
+@app.route('/user/<int:user_id>', methods=['GET'])
+def get_all_user(user_id):
 
-    user = User.query.all()
+    user = User.query.get.all()
 
-    planet_serialized = [user.serialize() for user in user]
+    user_serialized = [user.serialize() for user in user]
 
     if not user: 
         return jsonify({
             "msg": "User not found",
-        }), 400
-
+        }), 404
+    
     return jsonify({
             "msg": "User retrieved succesfully",
-            "users": user.serialized()
+            "User": user.serialized()
         }), 200
+
 
 
 # Obtener un usuario:
@@ -196,7 +194,7 @@ def get_user(user_id):
 
     user = User.query.get(user_id)
 
-    user_serialized = [user.serialize() for user in user]
+    user_serialize = [user.serialize() for user in user]
 
     if not user: 
         return jsonify({
