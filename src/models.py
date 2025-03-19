@@ -24,12 +24,18 @@ def serialize(self):
         return {
             "id": self.id,
             "username": self.username, 
-            "password": self.password,
             "full_name": self.full_name,    
             "email": self.email,
             "created": self.created,       
         }
+def serialize_favorite(self):
+      return{
+            "id": self.id,
+            "username": self.username, 
+            "email": self.email,
+            "favorites": [favorite.serialize() for favorite in self.favorites]
 
+      }
 
 class Planet(db.Model):
     __tablename__ = 'planet'
