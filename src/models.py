@@ -44,7 +44,7 @@ class Planet(db.Model):
     name = Column(String(100), nullable=False)
     description = Column(String(1000), nullable=False)
     films = Column(String(1000), nullable=False)
-    Affiliations = Column(String(100), nullable=False)
+    affiliations = Column(String(100), nullable=False)
     species= Column(String(50), nullable=False)
     places = Column(String(1000), nullable=False)
     location = Column(String(80), nullable=False)
@@ -67,7 +67,7 @@ def serialize(self):
             "name": self.name, 
             "description": self.description,
             "films": self.films,       
-            "Affiliations": self.Affiliations,
+            "affiliations": self.affiliations,
             "species": self.species, 
             "places": self.places,
             "location": self.location,    
@@ -96,7 +96,7 @@ class Vehicle(db.Model):
     drivers= Column(String(500), nullable=False)
     history = Column(String(1000), nullable=False)
     films = Column(String(1000), nullable=False)
-    Affiliations = Column(String(100), nullable=False)
+    affiliations = Column(String(100), nullable=False)
     planetlocation = Column(String(80), nullable=False)
     created = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
     edited = Column(DateTime, default=lambda: datetime.now(timezone.utc), onupdate=lambda: datetime.now(timezone.utc))
@@ -115,7 +115,7 @@ def serialize(self):
             "drivers": self.drivers,
             "history": self.history, 
             "films": self.films,       
-            "Affiliations": self.Affiliations,
+            "affiliations": self.affiliations,
             "planetlocation": self.planetlocation,
             "created": self.created,
             "edited": self.edited,                
@@ -131,7 +131,7 @@ class People(db.Model):
     species= Column(String(50), nullable=False)
     history = Column(String(1000), nullable=False)
     films = Column(String(1000), nullable=False)
-    Affiliations = Column(String(100), nullable=False)
+    affiliations = Column(String(100), nullable=False)
     planetlocation = Column(String(80), nullable=False)
     url = Column(String(100), nullable=False)
     created = Column(DateTime, default=lambda: datetime.now(timezone.utc), nullable=False)
@@ -149,7 +149,7 @@ def serialize(self):
             "species": self.species,
             "history": self.history, 
             "films": self.films,       
-            "Affiliations": self.Affiliations,
+            "affiliations": self.affiliations,
             "planetlocation": self.planetlocation,
             "url": self.url,
             "created": self.created,
