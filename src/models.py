@@ -20,7 +20,7 @@ class User(db.Model):
     
     favorites = relationship('Favorite', backref='user', lazy=True)
 
-def serialize(self):
+    def serialize(self):
         return {
             "id": self.id,
             "username": self.username, 
@@ -28,14 +28,13 @@ def serialize(self):
             "email": self.email,
             "created": self.created,       
         }
-def serialize_favorite(self):
-      return{
+    def serialize_favorite(self):
+        return{
             "id": self.id,
             "username": self.username, 
             "email": self.email,
             "favorites": [favorite.serialize() for favorite in self.favorites]
-
-      }
+        }
 
 class Planet(db.Model):
     __tablename__ = 'planet'
@@ -61,7 +60,7 @@ class Planet(db.Model):
     
     favorites = relationship('Favorite', backref='planet', lazy=True)
 
-def serialize(self):
+    def serialize(self):
         return {
             "id": self.id,
             "name": self.name, 
@@ -104,7 +103,7 @@ class Vehicle(db.Model):
     favorites = relationship('Favorite', backref='vehicle', lazy=True)
 
 
-def serialize(self):
+    def serialize(self):
         return {
             "id": self.id,
            "name": self.name, 
@@ -140,7 +139,7 @@ class People(db.Model):
     favorites = relationship('Favorite', backref='people', lazy=True)
 
 
-def serialize(self):
+    def serialize(self):
         return {
             "id": self.id,
             "name": self.name, 
@@ -166,7 +165,7 @@ class Favorite(db.Model):
     planet_id = Column(Integer, ForeignKey('planet.id'), nullable=True)
 
 
-def serialize(self):
+    def serialize(self):
         return {
             "id": self.id,
             "user_id": self.user_id, 
